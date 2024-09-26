@@ -1,0 +1,10 @@
+@import '_custom.scss';
+
+:host {
+    display: block;
+    padding: 1rem;
+}
+
+.component {
+    @extend .component;
+}

@@ -1,0 +1,41 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@evento.list.headline">Eventoes</h1>
+    <div>
+        <a routerLink="/eventos/add" class="btn btn-primary ms-2" i18n="@@evento.list.createNew">Create new Evento</a>
+    </div>
+</div>
+@if (!eventoes || eventoes.length === 0) {
+<div i18n="@@evento.list.empty">No Eventoes could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@evento.idEvento.label">Id Evento</th>
+                <th scope="col" i18n="@@evento.nivelCriticidad.label">Nivel Criticidad</th>
+                <th scope="col" i18n="@@evento.eventos.label">Eventos</th>
+                <th scope="col" i18n="@@evento.eventoss.label">Eventoss</th>
+                <th scope="col" i18n="@@evento.eventosss.label">Eventosss</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (evento of eventoes; track evento.idEvento) {
+            <tr>
+                <td>{{ evento.idEvento }}</td>
+                <td>{{ evento.nivelCriticidad }}</td>
+                <td>{{ evento.eventos }}</td>
+                <td>{{ evento.eventoss }}</td>
+                <td>{{ evento.eventosss }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/eventos/edit', evento.idEvento]" class="btn btn-sm btn-secondary" i18n="@@evento.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(evento.idEvento!)" class="btn btn-sm btn-secondary" i18n="@@evento.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

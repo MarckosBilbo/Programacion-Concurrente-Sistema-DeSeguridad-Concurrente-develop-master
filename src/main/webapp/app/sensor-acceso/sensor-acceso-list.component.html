@@ -1,0 +1,41 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@sensorAcceso.list.headline">Sensor Accesoes</h1>
+    <div>
+        <a routerLink="/sensorAccesos/add" class="btn btn-primary ms-2" i18n="@@sensorAcceso.list.createNew">Create new Sensor Acceso</a>
+    </div>
+</div>
+@if (!sensorAccesoes || sensorAccesoes.length === 0) {
+<div i18n="@@sensorAcceso.list.empty">No Sensor Accesoes could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@sensorAcceso.idSensor.label">Id Sensor</th>
+                <th scope="col" i18n="@@sensorAcceso.nombre.label">Nombre</th>
+                <th scope="col" i18n="@@sensorAcceso.ubicacion.label">Ubicacion</th>
+                <th scope="col" i18n="@@sensorAcceso.respuesta.label">Respuesta</th>
+                <th scope="col" i18n="@@sensorAcceso.sens.label">Sens</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (sensorAcceso of sensorAccesoes; track sensorAcceso.idSensor) {
+            <tr>
+                <td>{{ sensorAcceso.idSensor }}</td>
+                <td>{{ sensorAcceso.nombre }}</td>
+                <td>{{ sensorAcceso.ubicacion }}</td>
+                <td>{{ sensorAcceso.respuesta }}</td>
+                <td>{{ sensorAcceso.sens }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/sensorAccesos/edit', sensorAcceso.idSensor]" class="btn btn-sm btn-secondary" i18n="@@sensorAcceso.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(sensorAcceso.idSensor!)" class="btn btn-sm btn-secondary" i18n="@@sensorAcceso.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

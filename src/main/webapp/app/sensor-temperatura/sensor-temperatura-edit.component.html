@@ -1,0 +1,14 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@sensorTemperatura.edit.headline">Edit Sensor Temperatura</h1>
+    <div>
+        <a routerLink="/sensorTemperaturas" class="btn btn-secondary" i18n="@@sensorTemperatura.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="idSensor" rowType="number" i18n-label="@@sensorTemperatura.idSensor.label" label="Id Sensor" />
+    <app-input-row [group]="editForm" field="nombre" i18n-label="@@sensorTemperatura.nombre.label" label="Nombre" />
+    <app-input-row [group]="editForm" field="ubicacion" i18n-label="@@sensorTemperatura.ubicacion.label" label="Ubicacion" />
+    <app-input-row [group]="editForm" field="temperatura" rowType="number" i18n-label="@@sensorTemperatura.temperatura.label" label="Temperatura" />
+    <app-input-row [group]="editForm" field="sensorees" rowType="select" [options]="sensoreesValues" i18n-label="@@sensorTemperatura.sensorees.label" label="Sensorees" />
+    <input type="submit" i18n-value="@@sensorTemperatura.edit.headline" value="Edit Sensor Temperatura" class="btn btn-primary mt-4" />
+</form>

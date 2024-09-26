@@ -1,0 +1,26 @@
+@import '_custom.scss';
+@import 'bootstrap/scss/bootstrap.scss';
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.card {
+    background-color: #8bb4dd;
+    color: #000000;
+}
+
+.card-header{
+    font-weight: bold;
+}
+
+.list-group-item {
+    background-color: #8bb4dd;
+    color: #000000;
+}
+
+.table table-striped {
+    background-color: #8bb4dd;
+    color: #000000;
+}

@@ -1,0 +1,12 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@notificacion.edit.headline">Edit Notificacion</h1>
+    <div>
+        <a routerLink="/notificacions" class="btn btn-secondary" i18n="@@notificacion.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="idNotificacion" rowType="number" i18n-label="@@notificacion.idNotificacion.label" label="Id Notificacion" />
+    <app-input-row [group]="editForm" field="mensage" i18n-label="@@notificacion.mensage.label" label="Mensage" />
+    <app-input-row [group]="editForm" field="notificacion" rowType="select" [options]="notificacionValues" i18n-label="@@notificacion.notificacion.label" label="Notificacion" />
+    <input type="submit" i18n-value="@@notificacion.edit.headline" value="Edit Notificacion" class="btn btn-primary mt-4" />
+</form>

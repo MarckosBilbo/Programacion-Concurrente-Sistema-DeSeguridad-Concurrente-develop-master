@@ -1,0 +1,14 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@sensorAcceso.edit.headline">Edit Sensor Acceso</h1>
+    <div>
+        <a routerLink="/sensorAccesos" class="btn btn-secondary" i18n="@@sensorAcceso.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="idSensor" rowType="number" i18n-label="@@sensorAcceso.idSensor.label" label="Id Sensor" />
+    <app-input-row [group]="editForm" field="nombre" i18n-label="@@sensorAcceso.nombre.label" label="Nombre" />
+    <app-input-row [group]="editForm" field="ubicacion" i18n-label="@@sensorAcceso.ubicacion.label" label="Ubicacion" />
+    <app-input-row [group]="editForm" field="respuesta" i18n-label="@@sensorAcceso.respuesta.label" label="Respuesta" />
+    <app-input-row [group]="editForm" field="sens" rowType="select" [options]="sensValues" i18n-label="@@sensorAcceso.sens.label" label="Sens" />
+    <input type="submit" i18n-value="@@sensorAcceso.edit.headline" value="Edit Sensor Acceso" class="btn btn-primary mt-4" />
+</form>

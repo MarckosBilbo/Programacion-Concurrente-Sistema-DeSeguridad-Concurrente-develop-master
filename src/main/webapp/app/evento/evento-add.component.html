@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@evento.add.headline">Add Evento</h1>
+    <div>
+        <a routerLink="/eventos" class="btn btn-secondary" i18n="@@evento.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="nivelCriticidad" i18n-label="@@evento.nivelCriticidad.label" label="Nivel Criticidad" />
+    <app-input-row [group]="addForm" field="eventos" rowType="select" [options]="eventosValues" i18n-label="@@evento.eventos.label" label="Eventos" />
+    <app-input-row [group]="addForm" field="eventoss" rowType="select" [options]="eventossValues" i18n-label="@@evento.eventoss.label" label="Eventoss" />
+    <app-input-row [group]="addForm" field="eventosss" rowType="select" [options]="eventosssValues" i18n-label="@@evento.eventosss.label" label="Eventosss" />
+    <input type="submit" i18n-value="@@evento.add.headline" value="Add Evento" class="btn btn-primary mt-4" />
+</form>
