@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 public class SensorMovimientoDTO {
 
+    @NotNull
     private Integer idSensor;
 
     @NotNull

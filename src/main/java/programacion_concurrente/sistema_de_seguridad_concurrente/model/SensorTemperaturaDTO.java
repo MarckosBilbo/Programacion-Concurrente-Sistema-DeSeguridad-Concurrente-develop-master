@@ -13,6 +13,7 @@ import java.util.Set;
 @Setter
 public class SensorTemperaturaDTO {
 
+    @NotNull
     private Integer idSensor;
 
     @NotNull
