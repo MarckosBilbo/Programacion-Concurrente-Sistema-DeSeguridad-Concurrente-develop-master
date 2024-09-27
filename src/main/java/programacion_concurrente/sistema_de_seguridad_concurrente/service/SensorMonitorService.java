@@ -7,21 +7,27 @@ import programacion_concurrente.sistema_de_seguridad_concurrente.repos.EventoRep
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorAccesoRepository;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorMovimientoRepository;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorTemperaturaRepository;
+
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.concurrent.Executor;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
 public class SensorMonitorService {
 
+    private static final Logger logger = Logger.getLogger(SensorMonitorService.class.getName());
+
     private final SensorTemperaturaRepository sensorTemperaturaRepository;
     private final SensorMovimientoRepository sensorMovimientoRepository;
     private final SensorAccesoRepository sensorAccesoRepository;
     private final EventoRepository eventoRepository;
     private final ExecutorService executorService;
+    private CountDownLatch latch;
 
     @Autowired
     public SensorMonitorService(SensorTemperaturaRepository sensorTemperaturaRepository,
@@ -41,6 +47,11 @@ public class SensorMonitorService {
         List<SensorMovimiento> sensorMovimientos = sensorMovimientoRepository.findAll();
         List<SensorAcceso> sensorAccesos = sensorAccesoRepository.findAll();
 
+        if (sensorTemperaturas.isEmpty() && sensorMovimientos.isEmpty() && sensorAccesos.isEmpty()) {
+            logger.warning("No sensors found in the database. No events will be generated.");
+            return;
+        }
+
         List<Evento> eventosTemperatura = generateEvents("Temperatura", sensorTemperaturas.size());
         List<Evento> eventosMovimiento = generateEvents("Movimiento", sensorMovimientos.size());
         List<Evento> eventosAcceso = generateEvents("Acceso", sensorAccesos.size());
@@ -49,9 +60,70 @@ public class SensorMonitorService {
         assignEventsToSensors(eventosMovimiento, sensorMovimientos);
         assignEventsToSensors(eventosAcceso, sensorAccesos);
 
-        eventosTemperatura.forEach(evento -> executorService.submit(() -> logEvent(evento)));
-        eventosMovimiento.forEach(evento -> executorService.submit(() -> logEvent(evento)));
-        eventosAcceso.forEach(evento -> executorService.submit(() -> logEvent(evento)));
+        int totalEvents = eventosTemperatura.size() + eventosMovimiento.size() + eventosAcceso.size();
+        latch = new CountDownLatch(totalEvents);
+
+        eventosTemperatura.forEach(evento -> executorService.submit(() -> {
+            logEvent(evento);
+            logger.info("Starting task for event: " + evento.getDescripcion());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            logger.info("Completed task for event: " + evento.getDescripcion());
+            latch.countDown();
+        }));
+        eventosMovimiento.forEach(evento -> executorService.submit(() -> {
+            logEvent(evento);
+            logger.info("Starting task for event: " + evento.getDescripcion());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            logger.info("Completed task for event: " + evento.getDescripcion());
+            latch.countDown();
+        }));
+        eventosAcceso.forEach(evento -> executorService.submit(() -> {
+            logEvent(evento);
+            logger.info("Starting task for event: " + evento.getDescripcion());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            logger.info("Completed task for event: " + evento.getDescripcion());
+            latch.countDown();
+        }));
+
+        logger.info("All tasks submitted to ExecutorService");
+    }
+
+    public void awaitCompletion() {
+        if (latch == null) {
+            logger.warning("Latch is null. No tasks were submitted.");
+            return;
+        }
+        try {
+            latch.await();
+            logger.info("All tasks completed");
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public void shutdownExecutorService() {
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(5, TimeUnit.MINUTES)) {
+                executorService.shutdownNow();
+            }
+            logger.info("ExecutorService shut down");
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
     private List<Evento> generateEvents(String tipo, int count) {
