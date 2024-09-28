@@ -44,10 +44,31 @@ public class SensorMonitorService {
         this.sensorAccesoRepository = sensorAccesoRepository;
         this.eventoRepository = eventoRepository;
         this.executorService = taskExecutor;
+        initializeSensors();
+    }
+
+    private void initializeSensors() {
+        if (sensorTemperaturaRepository.findAll().isEmpty()) {
+            SensorTemperatura sensorTemperatura = new SensorTemperatura();
+            sensorTemperatura.setNombre("Sensor de Temperatura 1");
+            sensorTemperatura.setTemperatura(25);
+            sensorTemperaturaRepository.save(sensorTemperatura);
+        }
+
+        if (sensorMovimientoRepository.findAll().isEmpty()) {
+            SensorMovimiento sensorMovimiento = new SensorMovimiento();
+            sensorMovimiento.setNombre("Sensor de Movimiento 1");
+            sensorMovimientoRepository.save(sensorMovimiento);
+        }
+
+        if (sensorAccesoRepository.findAll().isEmpty()) {
+            SensorAcceso sensorAcceso = new SensorAcceso();
+            sensorAcceso.setNombre("Sensor de Acceso 1");
+            sensorAccesoRepository.save(sensorAcceso);
+        }
     }
 
     public void generateRandomEvents() {
-
         System.out.println("================================================================================================================================================================================================");
         System.out.println("================================================================================================================================================================================================");
         List<SensorTemperatura> sensorTemperaturas = sensorTemperaturaRepository.findAll();
