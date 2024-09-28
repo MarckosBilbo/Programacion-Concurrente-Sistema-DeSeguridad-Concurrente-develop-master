@@ -8,7 +8,9 @@ import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorAcc
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorMovimientoRepository;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorTemperaturaRepository;
 
-import java.time.OffsetDateTime;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -21,6 +23,8 @@ import java.util.stream.IntStream;
 public class SensorMonitorService {
 
     private static final Logger logger = Logger.getLogger(SensorMonitorService.class.getName());
+    private static final String ALPHANUMERIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     private final SensorTemperaturaRepository sensorTemperaturaRepository;
     private final SensorMovimientoRepository sensorMovimientoRepository;
@@ -43,6 +47,9 @@ public class SensorMonitorService {
     }
 
     public void generateRandomEvents() {
+
+        System.out.println("================================================================================================================================================================================================");
+        System.out.println("================================================================================================================================================================================================");
         List<SensorTemperatura> sensorTemperaturas = sensorTemperaturaRepository.findAll();
         List<SensorMovimiento> sensorMovimientos = sensorMovimientoRepository.findAll();
         List<SensorAcceso> sensorAccesos = sensorAccesoRepository.findAll();
@@ -52,52 +59,50 @@ public class SensorMonitorService {
             return;
         }
 
-        List<Evento> eventosTemperatura = generateEvents("Temperatura", sensorTemperaturas.size());
-        List<Evento> eventosMovimiento = generateEvents("Movimiento", sensorMovimientos.size());
-        List<Evento> eventosAcceso = generateEvents("Acceso", sensorAccesos.size());
+        int eventsPerSensor = 10; // Number of events to generate per sensor
+
+        List<Evento> eventosTemperatura = generateEvents("Temperatura", sensorTemperaturas.size() * eventsPerSensor);
+        List<Evento> eventosMovimiento = generateEvents("Movimiento", sensorMovimientos.size() * eventsPerSensor);
+        List<Evento> eventosAcceso = generateEvents("Acceso", sensorAccesos.size() * eventsPerSensor);
 
         assignEventsToSensors(eventosTemperatura, sensorTemperaturas);
         assignEventsToSensors(eventosMovimiento, sensorMovimientos);
         assignEventsToSensors(eventosAcceso, sensorAccesos);
 
-        int totalEvents = eventosTemperatura.size() + eventosMovimiento.size() + eventosAcceso.size();
-        latch = new CountDownLatch(totalEvents);
+        List<Evento> allEvents = new ArrayList<>();
+        allEvents.addAll(eventosTemperatura);
+        allEvents.addAll(eventosMovimiento);
+        allEvents.addAll(eventosAcceso);
 
-        eventosTemperatura.forEach(evento -> executorService.submit(() -> {
-            logEvent(evento);
-            logger.info("Starting task for event: " + evento.getDescripcion());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            logger.info("Completed task for event: " + evento.getDescripcion());
-            latch.countDown();
-        }));
-        eventosMovimiento.forEach(evento -> executorService.submit(() -> {
-            logEvent(evento);
-            logger.info("Starting task for event: " + evento.getDescripcion());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            logger.info("Completed task for event: " + evento.getDescripcion());
-            latch.countDown();
-        }));
-        eventosAcceso.forEach(evento -> executorService.submit(() -> {
-            logEvent(evento);
-            logger.info("Starting task for event: " + evento.getDescripcion());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            logger.info("Completed task for event: " + evento.getDescripcion());
-            latch.countDown();
-        }));
+        Collections.shuffle(allEvents); // Mezclar los eventos
 
-        logger.info("All tasks submitted to ExecutorService");
+        latch = new CountDownLatch(allEvents.size());
+
+        for (Evento evento : allEvents) {
+            executorService.submit(() -> {
+                logger.info("$$ Arrancamos la Tarea del " + evento.getDescripcion() + " $$");
+                logEvent(evento);
+                try {
+                    Thread.sleep(500 + RANDOM.nextInt(4000)); // Sleep between 0.5 and 4.5 seconds
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                logger.info("&& Acabada la tarea del " + evento.getDescripcion() + " &&");
+                latch.countDown();
+            });
+        }
+        logger.info("<< >> Todas las tareas 'metidas' en el Executor Service << >>");
+    }
+
+    private List<Evento> generateEvents(String tipo, int count) {
+        return IntStream.range(0, count)
+            .mapToObj(i -> {
+                Evento evento = new Evento();
+                evento.setTipoEvento(tipo);
+                evento.setDescripcion("Evento de " + tipo + " #" + i);
+                return evento;
+            })
+            .collect(Collectors.toList());
     }
 
     public void awaitCompletion() {
@@ -107,7 +112,7 @@ public class SensorMonitorService {
         }
         try {
             latch.await();
-            logger.info("All tasks completed");
+            logger.info("*** Todas las tareas han finalizado ***");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -119,24 +124,16 @@ public class SensorMonitorService {
             if (!executorService.awaitTermination(5, TimeUnit.MINUTES)) {
                 executorService.shutdownNow();
             }
-            logger.info("ExecutorService shut down");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+            logger.info("*** Cerramos el Executor Service ***\n");
+            System.out.println("================================================================================================================================================================================================");
+            System.out.println("================================================================================================================================================================================================");
+
         } catch (InterruptedException e) {
             executorService.shutdownNow();
             Thread.currentThread().interrupt();
         }
-    }
-
-    private List<Evento> generateEvents(String tipo, int count) {
-        return IntStream.range(0, count)
-            .mapToObj(i -> {
-                Evento evento = new Evento();
-                evento.setTipoEvento(tipo);
-                evento.setNivelCriticidad("Alta");
-                evento.setDescripcion("Evento de " + tipo + " #" + i);
-                evento.setFechaHora(OffsetDateTime.now());
-                return evento;
-            })
-            .collect(Collectors.toList());
     }
 
     private void assignEventsToSensors(List<Evento> eventos, List<? extends Sensor> sensores) {
@@ -155,17 +152,24 @@ public class SensorMonitorService {
     }
 
     private void logEvent(Evento evento) {
-        System.out.println("Evento: " + evento.getDescripcion() + " asignado a sensor: " + getSensorId(evento));
+        System.out.println("\nEvento: " + evento.getDescripcion() + " asignado a sensor: " + getSensorId(evento) + "\n");
     }
 
     private String getSensorId(Evento evento) {
+        String suffix = generateAlphanumericSuffix();
         if (evento.getSensorTemperatura() != null) {
-            return "SensorTemperatura #" + evento.getSensorTemperatura().getIdSensor();
+            return "SensorTemperatura_" + suffix;
         } else if (evento.getSensorMovimiento() != null) {
-            return "SensorMovimiento #" + evento.getSensorMovimiento().getIdSensor();
+            return "SensorMovimiento_" + suffix;
         } else if (evento.getSensorAcceso() != null) {
-            return "SensorAcceso #" + evento.getSensorAcceso().getIdSensor();
+            return "SensorAcceso_" + suffix;
         }
         return "Sensor desconocido";
+    }
+
+    private String generateAlphanumericSuffix() {
+        return RANDOM.ints(4, 0, ALPHANUMERIC.length())
+            .mapToObj(i -> String.valueOf(ALPHANUMERIC.charAt(i)))
+            .collect(Collectors.joining());
     }
 }
