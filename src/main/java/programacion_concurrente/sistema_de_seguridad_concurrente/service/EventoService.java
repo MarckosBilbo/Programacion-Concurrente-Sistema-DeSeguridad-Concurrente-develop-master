@@ -4,13 +4,11 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import programacion_concurrente.sistema_de_seguridad_concurrente.domain.Evento;
-import programacion_concurrente.sistema_de_seguridad_concurrente.domain.Notificacion;
 import programacion_concurrente.sistema_de_seguridad_concurrente.domain.SensorAcceso;
 import programacion_concurrente.sistema_de_seguridad_concurrente.domain.SensorMovimiento;
 import programacion_concurrente.sistema_de_seguridad_concurrente.domain.SensorTemperatura;
 import programacion_concurrente.sistema_de_seguridad_concurrente.model.EventoDTO;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.EventoRepository;
-import programacion_concurrente.sistema_de_seguridad_concurrente.repos.NotificacionRepository;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorAccesoRepository;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorMovimientoRepository;
 import programacion_concurrente.sistema_de_seguridad_concurrente.repos.SensorTemperaturaRepository;
@@ -25,18 +23,16 @@ public class EventoService {
     private final SensorTemperaturaRepository sensorTemperaturaRepository;
     private final SensorMovimientoRepository sensorMovimientoRepository;
     private final SensorAccesoRepository sensorAccesoRepository;
-    private final NotificacionRepository notificacionRepository;
+
 
     public EventoService(final EventoRepository eventoRepository,
                          final SensorTemperaturaRepository sensorTemperaturaRepository,
                          final SensorMovimientoRepository sensorMovimientoRepository,
-                         final SensorAccesoRepository sensorAccesoRepository,
-                         final NotificacionRepository notificacionRepository) {
+                         final SensorAccesoRepository sensorAccesoRepository) {
         this.eventoRepository = eventoRepository;
         this.sensorTemperaturaRepository = sensorTemperaturaRepository;
         this.sensorMovimientoRepository = sensorMovimientoRepository;
         this.sensorAccesoRepository = sensorAccesoRepository;
-        this.notificacionRepository = notificacionRepository;
     }
 
     public List<EventoDTO> findAll() {
@@ -100,12 +96,7 @@ public class EventoService {
         final ReferencedWarning referencedWarning = new ReferencedWarning();
         final Evento evento = eventoRepository.findById(idEvento)
             .orElseThrow(NotFoundException::new);
-        final Notificacion notificacionNotificacion = notificacionRepository.findFirstByNotificacion(evento);
-        if (notificacionNotificacion != null) {
-            referencedWarning.setKey("evento.notificacion.notificacion.referenced");
-            referencedWarning.addParam(notificacionNotificacion.getIdNotificacion());
-            return referencedWarning;
-        }
+
         return null;
     }
 
