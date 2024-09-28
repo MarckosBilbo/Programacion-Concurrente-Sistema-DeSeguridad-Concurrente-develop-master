@@ -19,9 +19,6 @@ public class Evento {
     @Column(nullable = false)
     private String tipoEvento;
 
-    @Column(nullable = false)
-    private String nivelCriticidad;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sensor_acceso_id")
@@ -39,16 +36,7 @@ public class Evento {
 
 
     @Column(nullable = false)
-    private OffsetDateTime fechaHora;
-
-
-    @Column(nullable = false)
     private String descripcion;
-
-
-    @OneToOne
-    @JoinColumn(name = "notificacion_id")
-    private Notificacion notificacion;
 
 }
 

@@ -18,8 +18,6 @@ import lombok.Setter;
 @Setter
 public class SensorTemperatura extends Sensor {
 
-    @Column(length = 100)
-    private String ubicacion;
 
     @Column(nullable = false)
     private Integer temperatura;
@@ -27,8 +25,9 @@ public class SensorTemperatura extends Sensor {
     @OneToMany(mappedBy = "sensorTemperatura")
     private Set<Evento> sensorTemperatura;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sensorees_id", nullable = false)
-    private Usuario sensorees;
+    // Elimina la relación con Usuario
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "sensorees_id")
+    // private Usuario sensorees;
 
 }

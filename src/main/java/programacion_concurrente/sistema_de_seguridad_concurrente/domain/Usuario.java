@@ -8,17 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
-import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 
 @Entity
 @Table(name = "Usuarios")
@@ -49,15 +46,6 @@ public class Usuario {
     @JoinColumn(name = "usuarioo_id", nullable = false, unique = true)
     private Rol usuarioo;
 
-    @OneToMany(mappedBy = "sensorees")
-    private Set<SensorTemperatura> usuariooo;
-
-    @OneToMany(mappedBy = "sensior")
-    private Set<SensorMovimiento> usuaroi;
-
-    @OneToMany(mappedBy = "sens")
-    private Set<SensorAcceso> usuar;
-
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private OffsetDateTime dateCreated;
@@ -67,3 +55,15 @@ public class Usuario {
     private OffsetDateTime lastUpdated;
 
 }
+
+    //@OneToMany(mappedBy = "sensorees")
+    //private Set<SensorTemperatura> usuariooo;
+
+    // Elimina las relaciones con sensores
+    // @OneToMany(mappedBy = "sensior")
+    // private Set<SensorMovimiento> usuaroi;
+
+    // @OneToMany(mappedBy = "sens")
+    // private Set<SensorAcceso> usuar;
+
+

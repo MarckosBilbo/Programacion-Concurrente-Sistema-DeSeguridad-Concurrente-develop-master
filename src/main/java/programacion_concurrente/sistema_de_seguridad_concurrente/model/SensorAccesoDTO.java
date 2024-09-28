@@ -21,18 +21,11 @@ public class SensorAccesoDTO {
     @Size(max = 50)
     private String nombre;
 
-    @Size(max = 100)
-    private String ubicacion;
-
-    @NotNull
-    @Size(max = 255)
-    private String respuesta;
-
     @NotNull
     private Set<Evento> sensorAcceso;
 
-    @NotNull
-    private Integer sens;
+    //@NotNull
+    //private Integer sens;
 
 
 }

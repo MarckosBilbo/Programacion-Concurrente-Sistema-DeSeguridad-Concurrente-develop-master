@@ -27,12 +27,4 @@ public abstract class Sensor {
     @Column(nullable = false, length = 50)
     private String nombre;
 
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private OffsetDateTime dateCreated;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private OffsetDateTime lastUpdated;
-
 }

@@ -20,9 +20,6 @@ public class SensorTemperaturaDTO {
     @Size(max = 50)
     private String nombre;
 
-    @Size(max = 100)
-    private String ubicacion;
-
     @NotNull
     private Integer temperatura;
 
@@ -30,7 +27,7 @@ public class SensorTemperaturaDTO {
     private Set<Evento> sensorTemperatura;
 
 
-    @NotNull
-    private Integer sensorees;
+    //@NotNull
+    //private Integer sensorees;
 
 }

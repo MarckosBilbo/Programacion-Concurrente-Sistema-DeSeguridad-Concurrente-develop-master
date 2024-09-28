@@ -13,20 +13,14 @@ import lombok.Setter;
 @Setter
 public class SensorAcceso extends Sensor {
 
-    @Column(length = 100)
-    private String ubicacion;
-
-    @Column(nullable = false)
-    private String respuesta;
 
     @OneToMany(mappedBy = "sensorAcceso")
     private Set<Evento> sensorAcceso;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sens_id", nullable = false)
-    private Usuario sens;
 
-    public OffsetDateTime getLastModifiedDate() {
-        return this.getLastUpdated();
-    }
+    // Elimina la relación con Usuario
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "sens_id")
+    // private Usuario sens;
+
 }

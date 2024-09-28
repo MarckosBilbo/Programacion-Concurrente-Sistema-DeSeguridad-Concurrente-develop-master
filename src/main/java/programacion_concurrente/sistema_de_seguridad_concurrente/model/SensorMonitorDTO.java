@@ -22,9 +22,9 @@ public class SensorMonitorDTO {
     @NotNull
     private String status;
 
-    private OffsetDateTime lastReadingTime;
+    //private OffsetDateTime lastReadingTime;
 
     @Size(max = 50)
     private String lastReadingValue;
-    private OffsetDateTime lastDetectionTime;
+    //private OffsetDateTime lastDetectionTime;
 }

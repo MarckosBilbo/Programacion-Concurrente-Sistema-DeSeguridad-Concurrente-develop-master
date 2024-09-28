@@ -21,12 +21,9 @@ public class SensorMovimientoDTO {
     @Size(max = 50)
     private String nombre;
 
-    @Size(max = 100)
-    private String ubicacion;
-
-    @NotNull
-    private Integer sensior;
-
     @NotNull
     private Set<Evento> sensorMovimiento;
+
+    //@NotNull
+    //private Integer sensior;
 }

@@ -16,11 +16,6 @@ public class EventoDTO {
     @NotNull
     private Integer idEvento;
 
-    @Size(max = 50)
-    private String nivelCriticidad;
-
-    private OffsetDateTime fechaHora;
-
     @NotNull
     @Size(max = 50)
     private String TipoEvento;
