@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.rest;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,3 +27,4 @@ public class DashboardResource {
         return ResponseEntity.ok(dashboardData);
     }
 }
+*/

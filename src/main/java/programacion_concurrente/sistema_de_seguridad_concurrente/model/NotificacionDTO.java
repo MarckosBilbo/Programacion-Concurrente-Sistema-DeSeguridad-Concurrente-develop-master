@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.model;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.model;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,3 +20,4 @@ public class NotificacionDTO {
     private Integer notificacion;
 
 }
+*/

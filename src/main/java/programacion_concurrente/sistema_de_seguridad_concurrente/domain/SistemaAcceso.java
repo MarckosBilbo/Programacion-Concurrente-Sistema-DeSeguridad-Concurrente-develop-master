@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.domain;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,3 +19,4 @@ public class SistemaAcceso {
     private String ultimoUsuario;
 
 }
+*/

@@ -9,24 +9,20 @@ import lombok.Setter;
 @Setter
 public class UsuarioDTO {
 
+    @NotNull
     private Integer idUsuario;
 
     @NotNull
     @Size(max = 100)
     private String nombre;
 
-    @NotNull
-    @Size(max = 100)
-    private String email;
-
-    private Boolean activo;
-
-    @NotNull
-    @UsuarioUsuarioUnique
-    private Integer usuario;
-
-    @NotNull
-    @UsuarioUsuariooUnique
-    private Long usuarioo;
-
 }
+
+
+//@NotNull
+//@UsuarioUsuarioUnique
+//private Integer usuario;
+
+//@NotNull
+//@UsuarioUsuariooUnique
+//private Long usuarioo;

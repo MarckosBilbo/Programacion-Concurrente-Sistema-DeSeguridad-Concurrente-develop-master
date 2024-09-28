@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.domain;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,3 +44,4 @@ public class Rol {
     private OffsetDateTime lastUpdated;
 
 }
+*/

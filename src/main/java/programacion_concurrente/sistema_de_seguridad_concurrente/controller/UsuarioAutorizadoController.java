@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.controller;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +28,4 @@ public class UsuarioAutorizadoController {
         usuarioAutorizadoService.eliminarUsuario(id);
     }
 }
-
+*/

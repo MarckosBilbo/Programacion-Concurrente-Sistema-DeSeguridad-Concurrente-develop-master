@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.service;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.service;
 
 import java.util.List;
 import org.springframework.data.domain.Sort;
@@ -74,3 +74,4 @@ public class NotificacionService {
         return notificacionRepository.existsByNotificacionIdEvento(idEvento);
     }
 }
+*/

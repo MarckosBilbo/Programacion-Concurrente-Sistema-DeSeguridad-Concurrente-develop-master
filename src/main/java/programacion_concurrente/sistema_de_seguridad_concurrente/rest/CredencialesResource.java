@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.rest;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.rest;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -70,3 +70,4 @@ public class CredencialesResource {
     }
 
 }
+*/

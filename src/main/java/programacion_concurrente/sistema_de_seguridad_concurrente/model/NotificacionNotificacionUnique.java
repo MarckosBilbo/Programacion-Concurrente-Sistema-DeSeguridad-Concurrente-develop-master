@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente.model;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente.model;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
@@ -18,9 +18,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import programacion_concurrente.sistema_de_seguridad_concurrente.service.NotificacionService;
 
 
-/**
- * Validate that the idEvento value isn't taken yet.
- */
+
 @Target({ FIELD, METHOD, ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -65,3 +63,4 @@ public @interface NotificacionNotificacionUnique {
     }
 
 }
+*/
