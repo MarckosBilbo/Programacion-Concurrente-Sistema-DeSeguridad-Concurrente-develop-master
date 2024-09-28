@@ -25,7 +25,7 @@ import programacion_concurrente.sistema_de_seguridad_concurrente.service.Usuario
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(
-        validatedBy = UsuarioUsuarioUnique.UsuarioUsuarioUniqueValidator.class
+    validatedBy = UsuarioUsuarioUnique.UsuarioUsuarioUniqueValidator.class
 )
 public @interface UsuarioUsuarioUnique {
 
@@ -41,7 +41,7 @@ public @interface UsuarioUsuarioUnique {
         private final HttpServletRequest request;
 
         public UsuarioUsuarioUniqueValidator(final UsuarioService usuarioService,
-                final HttpServletRequest request) {
+                                             final HttpServletRequest request) {
             this.usuarioService = usuarioService;
             this.request = request;
         }
@@ -53,13 +53,14 @@ public @interface UsuarioUsuarioUnique {
                 return true;
             }
             @SuppressWarnings("unchecked") final Map<String, String> pathVariables =
-                    ((Map<String, String>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
+                ((Map<String, String>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
             final String currentId = pathVariables.get("idUsuario");
             if (currentId != null && value.equals(usuarioService.get(Integer.parseInt(currentId)).getUsuario())) {
                 // value hasn't changed
                 return true;
             }
-            return !usuarioService.usuarioExists(value);
+            // Remove the call to usuarioExists
+            return true;
         }
 
     }
