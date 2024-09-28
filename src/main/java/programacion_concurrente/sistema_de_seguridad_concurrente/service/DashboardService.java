@@ -32,13 +32,10 @@ public class DashboardService {
                 DashboardDTO dto = new DashboardDTO();
                 dto.setSensorId(sensor.getIdSensor());
                 dto.setSensorType("Acceso");
-                dto.setStatus(sensor.getRespuesta());
-                dto.setLastReadingTime(sensor.getLastModifiedDate());
-                dto.setLastReadingValue(sensor.getRespuesta());
                 // Assuming getRecentActivity() returns the most recent event
                 Evento recentEvent = sensor.getSensorAcceso().stream().findFirst().orElse(null);
                 if (recentEvent != null) {
-                    dto.setRecentActivityTime(recentEvent.getFechaHora());
+
                     dto.setEventType(recentEvent.getTipoEvento());
                     dto.setEventDescription(recentEvent.getDescripcion());
                 }
@@ -51,11 +48,10 @@ public class DashboardService {
                 dto.setSensorId(sensor.getIdSensor());
                 dto.setSensorType("Movimiento");
                 dto.setStatus("Activo"); // Assuming status is always "Activo"
-                dto.setLastReadingTime(sensor.getLastModifiedDate());
+
                 dto.setLastReadingValue("Movimiento detectado");
                 Evento recentEvent = sensor.getSensorMovimiento().stream().findFirst().orElse(null);
                 if (recentEvent != null) {
-                    dto.setRecentActivityTime(recentEvent.getFechaHora());
                     dto.setEventType(recentEvent.getTipoEvento());
                     dto.setEventDescription(recentEvent.getDescripcion());
                 }
@@ -68,11 +64,9 @@ public class DashboardService {
                 dto.setSensorId(sensor.getIdSensor());
                 dto.setSensorType("Temperatura");
                 dto.setStatus(sensor.getTemperatura() + "°C");
-                dto.setLastReadingTime(sensor.getLastUpdated());
                 dto.setLastReadingValue(sensor.getTemperatura() + "°C");
                 Evento recentEvent = sensor.getSensorTemperatura().stream().findFirst().orElse(null);
                 if (recentEvent != null) {
-                    dto.setRecentActivityTime(recentEvent.getFechaHora());
                     dto.setEventType(recentEvent.getTipoEvento());
                     dto.setEventDescription(recentEvent.getDescripcion());
                 }

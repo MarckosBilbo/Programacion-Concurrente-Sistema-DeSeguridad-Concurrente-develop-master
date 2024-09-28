@@ -70,8 +70,8 @@ public class EventoService {
     }
 
     private EventoDTO mapToDTO(final Evento evento, final EventoDTO eventoDTO) {
+
         eventoDTO.setIdEvento(evento.getIdEvento());
-        eventoDTO.setNivelCriticidad(evento.getNivelCriticidad());
         eventoDTO.setSensorTemperatura(evento.getSensorTemperatura() == null ? null : evento.getSensorTemperatura().getIdSensor());
         eventoDTO.setSensorMovimiento(evento.getSensorMovimiento() == null ? null : evento.getSensorMovimiento().getIdSensor());
         eventoDTO.setSensorAcceso(evento.getSensorAcceso() == null ? null : evento.getSensorAcceso().getIdSensor());
@@ -79,7 +79,7 @@ public class EventoService {
     }
 
     private Evento mapToEntity(final EventoDTO eventoDTO, final Evento evento) {
-        evento.setNivelCriticidad(eventoDTO.getNivelCriticidad());
+
 
         final SensorTemperatura sensorTemperatura = eventoDTO.getSensorTemperatura() == null ? null : sensorTemperaturaRepository.findById(eventoDTO.getSensorTemperatura())
             .orElseThrow(() -> new NotFoundException("SensorTemperatura not found"));
