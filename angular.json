@@ -15,7 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "./target/classes/static",
             "index": "src/main/webapp/index.html",
@@ -28,7 +28,11 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/main/webapp/favicon.ico",
-              {"glob": "**/*", "input": "src/main/webapp/public"}
+              {
+                "glob": "**/*",
+                "input": "src/main/webapp/public",
+                "output": "/public"
+              }
             ],
             "styles": [
               "src/main/webapp/styles.scss"
@@ -50,9 +54,12 @@
                 }
               ],
               "optimization": {
+                "scripts": true,
                 "styles": {
+                  "minify": true,
                   "inlineCritical": false
-                }
+                },
+                "fonts": true
               },
               "outputHashing": "all"
             },
@@ -60,6 +67,7 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
+              "namedChunks": true,
               "fileReplacements": [
                 {
                   "replace": "src/main/webapp/environments/environment.ts",
@@ -74,10 +82,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angularclient:build:production"
+              "browserTarget": "angularclient:build:production"
             },
             "development": {
-              "buildTarget": "angularclient:build:development"
+              "browserTarget": "angularclient:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -99,7 +107,11 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/main/webapp/favicon.ico",
-              {"glob": "**/*", "input": "src/main/webapp/public"}
+              {
+                "glob": "**/*",
+                "input": "src/main/webapp/public",
+                "output": "/public"
+              }
             ],
             "styles": [
               "src/main/webapp/styles.scss"

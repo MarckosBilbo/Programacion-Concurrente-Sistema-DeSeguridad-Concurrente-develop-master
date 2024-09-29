@@ -1,3 +1,21 @@
+package programacion_concurrente.sistema_de_seguridad_concurrente;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+@SpringBootApplication
+public class SistemaDeSeguridadConcurrenteApplication {
+
+    public static void main(final String[] args) {
+        SpringApplication.run(SistemaDeSeguridadConcurrenteApplication.class, args);
+    }
+
+}
+
+
+
+
 /*
 // SistemaDeSeguridadConcurrenteApplication.java
 package programacion_concurrente.sistema_de_seguridad_concurrente;
@@ -39,7 +57,7 @@ public class SistemaDeSeguridadConcurrenteApplication implements CommandLineRunn
 
 
 
-package programacion_concurrente.sistema_de_seguridad_concurrente;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -73,31 +91,7 @@ public class SistemaDeSeguridadConcurrenteApplication implements CommandLineRunn
         sensorMonitorService.shutdownExecutorService();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*package programacion_concurrente.sistema_de_seguridad_concurrente;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-
-@SpringBootApplication
-public class SistemaDeSeguridadConcurrenteApplication {
-
-    public static void main(final String[] args) {
-        SpringApplication.run(SistemaDeSeguridadConcurrenteApplication.class, args);
-    }
-
-}
-
 */
+
+
+

@@ -1,0 +1,10 @@
+.container {
+    margin-top: 20px;
+}
+
+.terminal {
+    background-color: black;
+    color: white;
+    height: 400px;
+    overflow-y: scroll;
+}

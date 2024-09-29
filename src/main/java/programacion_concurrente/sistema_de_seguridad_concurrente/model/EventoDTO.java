@@ -20,8 +20,8 @@ public class EventoDTO {
     @Size(max = 50)
     private String TipoEvento;
 
-    @Size(max = 255)
-    private String descripcion;
+    //@Size(max = 255)
+    //private String descripcion;
 
     @NotNull
     private Integer sensorTemperatura;

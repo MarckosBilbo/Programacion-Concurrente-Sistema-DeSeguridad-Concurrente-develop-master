@@ -1,23 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from 'app/common/header/header.component';
-
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  msgSuccess: string | null = null;
+  msgInfo: string | null = null;
+  msgError: string | null = null;
 
-  router = inject(Router);
-
-  msgSuccess = null;
-  msgInfo = null;
-  msgError = null;
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
