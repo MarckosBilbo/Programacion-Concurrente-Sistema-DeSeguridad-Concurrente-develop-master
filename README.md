@@ -1,6 +1,6 @@
 ## Proyecto de Sistema de Seguridad Concurrente
 
-Repositorio final (DEFINITIVO)-->https://github.com/MarckosBilbo/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente-develop-master
+Repositorio(DEFINITIVO)-->https://github.com/MarckosBilbo/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente-develop-master
 
 Repositorio preevio (para que veas los commits antiguos(NO TERMINADO))-->https://github.com/Programacion-Concurrente/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente
 
