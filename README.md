@@ -9,7 +9,9 @@ Repositorio (NO TERMINADO) para ver commits)-->https://github.com/Programacion-C
 
 ## Ejecución del Proyecto
 -Backend: Ejecutar la aplicación Spring Boot (Muestra los hilos por consola)
+
 -Frontend: Ejecutar la aplicación Angular (Por desgracia dicho fronend no se abre en base a la ejecucion de la Springboot aplicattion)
+
 -Navegador: Una vez lanzada la aplicattion (Springboot) por consola al menos se puede acceder (mientrar aun "Runnea")  a http://localhost:8080 para interactuar con la aplicación(Angular frontend).
 
 
