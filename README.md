@@ -1,4 +1,5 @@
 # Proyecto de Sistema de Seguridad Concurrente
+## Marcos García, Alberto Valera, Samuel Muñoz y Rodrigo Rojas.
 
 Repositorio(DEFINITIVO)-->https://github.com/MarckosBilbo/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente-develop-master
 
