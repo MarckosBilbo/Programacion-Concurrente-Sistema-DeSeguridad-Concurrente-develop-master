@@ -1,65 +1,133 @@
-# SistemaDeSeguridadConcurrente
+# Proyecto de Sistema de Seguridad Concurrente
 
-This app was created with Bootify.io - tips on working with the code [can be found here](https://bootify.io/next-steps/).
+Repositorio(DEFINITIVO)-->https://github.com/MarckosBilbo/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente-develop-master
 
-## Development
+Repositorio (NO TERMINADO) para ver commits)-->https://github.com/Programacion-Concurrente/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente
 
-When starting the application `docker compose up` is called and the app will connect to the contained services.
-[Docker](https://www.docker.com/get-started/) must be available on the current system.
 
-During development it is recommended to use the profile `local`. In IntelliJ `-Dspring.profiles.active=local` can be
-added in the VM options of the Run Configuration after enabling this property in "Modify options". Create your own
-`application-local.yml` file to override settings for development.
+### -Este proyecto consiste en una aplicación de seguridad concurrente desarrollada con Spring Boot en el backend y Angular en el frontend. La aplicación permite la gestión de usuarios y la monitorización de eventos generados por sensores.
 
-Lombok must be supported by your IDE. For IntelliJ install the Lombok plugin and enable annotation processing -
-[learn more](https://bootify.io/next-steps/spring-boot-with-lombok.html).
+## Ejecución del Proyecto
+-Backend: Ejecutar la aplicación Spring Boot (Muestra los hilos por consola)
+-Frontend: Ejecutar la aplicación Angular (Por desgracia dicho fronend no se abre en base a la ejecucion de la Springboot aplicattion)
+-Navegador: Una vez lanzada la aplicattion (Springboot) por consola al menos se puede acceder (mientrar aun "Runnea")  a http://localhost:8080 para interactuar con la aplicación(Angular frontend).
 
-In addition to the Spring Boot application, the development server must also be started - for this
-[Node.js](https://nodejs.org/) version 20 is required. Angular CLI and required dependencies must be installed once:
 
-```
-npm install -g @angular/cli
-npm install
-```
 
-The development server can be started as follows:
+### Funcionalidad General
 
-```
-ng serve
-```
+- **Backend (Spring Boot)**: Gestiona la lógica de negocio, la autenticación de usuarios y la generación de eventos de sensores.
+- **Frontend (Angular)**: Proporciona una interfaz de usuario para el inicio de sesión, la gestión de usuarios y la visualización de eventos de sensores.
 
-Your application is now accessible under `localhost:4200`.
+### Clases Importantes del Backend
 
-Add code using Angular schematics with `ng generate ...`.
-Frontend unit tests can be executed with `ng test`.
-Generate a messages.json for translation with `ng extract-i18n –format=json`.
+#### `Usuario.java`
+Define la entidad `Usuario` con atributos como `idUsuario`, `nombre` y `rol`. Los roles pueden ser `ADMIN` o `USER`.
 
-## Build
+#### `UsuarioRepository.java`
+Interfaz que extiende `JpaRepository` para operaciones CRUD en la entidad `Usuario`.
 
-The application can be built using the following command:
+#### `UsuarioService.java`
+Servicio que contiene la lógica de negocio relacionada con los usuarios, como el inicio de sesión y la creación de usuarios.
 
-```
-mvnw clean package
-```
+#### `AuthController.java`
+Controlador REST que maneja las solicitudes de autenticación y creación de usuarios.
 
-Start your application with the following command - here with the profile `production`:
+#### `SensorMonitorService.java`
+Servicio que gestiona la generación y asignación de eventos a los sensores. Utiliza un `ExecutorService` para manejar la concurrencia.
 
-```
-java -Dspring.profiles.active=production -jar ./target/Sistema-DeSeguridad-Concurrente-0.0.1-SNAPSHOT.jar
-```
+#### `SensorMonitorResource.java`
+Controlador REST que expone un endpoint para generar eventos aleatorios de sensores.
 
-If required, a Docker image can be created with the Spring Boot plugin. Add `SPRING_PROFILES_ACTIVE=production` as
-environment variable when running the container.
+### Clases Secundarias
 
-```
-mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=programacion-concurrente/sistema-de-seguridad-concurrente
-```
+#### Sensores de Movimiento
 
-## Further readings
+- **Dominio**:
+  - `SensorMovimiento.java`: Define la entidad `SensorMovimiento` con atributos como `idSensor` y `nombre`.
 
-* [Maven docs](https://maven.apache.org/guides/index.html)  
-* [Spring Boot reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)  
-* [Spring Data JPA reference](https://docs.spring.io/spring-data/jpa/reference/jpa.html)
-* [Learn Angular](https://angular.dev/tutorials/learn-angular)  
-* [Angular CLI](https://angular.dev/tools/cli)
-* [Bootstrap docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/)  
+- **Repositorio**:
+  - `SensorMovimientoRepository.java`: Interfaz que extiende `JpaRepository` para operaciones CRUD en la entidad `SensorMovimiento`.
+
+- **Servicio**:
+  - `SensorMovimientoService.java`: Servicio que contiene la lógica de negocio relacionada con los sensores de movimiento.
+
+#### Sensores de Temperatura
+
+- **Dominio**:
+  - `SensorTemperatura.java`: Define la entidad `SensorTemperatura` con atributos como `idSensor`, `nombre` y `temperatura`.
+
+- **Repositorio**:
+  - `SensorTemperaturaRepository.java`: Interfaz que extiende `JpaRepository` para operaciones CRUD en la entidad `SensorTemperatura`.
+
+- **Servicio**:
+  - `SensorTemperaturaService.java`: Servicio que contiene la lógica de negocio relacionada con los sensores de temperatura.
+
+#### Sensores de Acceso
+
+- **Dominio**:
+  - `SensorAcceso.java`: Define la entidad `SensorAcceso` con atributos como `idSensor` y `nombre`.
+
+- **Repositorio**:
+  - `SensorAccesoRepository.java`: Interfaz que extiende `JpaRepository` para operaciones CRUD en la entidad `SensorAcceso`.
+
+- **Servicio**:
+  - `SensorAccesoService.java`: Servicio que contiene la lógica de negocio relacionada con los sensores de acceso.
+
+#### Eventos
+
+- **Dominio**:
+  - `Evento.java`: Define la entidad `Evento` con atributos como `idEvento`, `tipoEvento`, `descripcion` y referencias a los sensores.
+
+- **Repositorio**:
+  - `EventoRepository.java`: Interfaz que extiende `JpaRepository` para operaciones CRUD en la entidad `Evento`.
+
+
+## DOCKER.COMPOSE.YML:
+
+
+services:
+  
+  backend:
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  
+  frontend:
+   ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: PROTEGIDA
+      MYSQL_DATABASE: Sistema-De-Seguridad-Concurrente
+    ports:
+      - "3307:3306"
+
+
+### Configuración de Rutas en Angular
+
+```typescript
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard.component';
+import { UserDashboardComponent } from './user/user-dashboard.component';
+
+const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'admin/dashboard', component: AdminDashboardComponent },
+  { path: 'user/dashboard', component: UserDashboardComponent }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
+
