@@ -80,7 +80,7 @@ public class SensorMonitorService {
             return;
         }
 
-        int eventsPerSensor = 10; // Number of events to generate per sensor
+        int eventsPerSensor = 15; // Number of events to generate per sensor
 
         List<Evento> eventosTemperatura = generateEvents("Temperatura", sensorTemperaturas.size() * eventsPerSensor);
         List<Evento> eventosMovimiento = generateEvents("Movimiento", sensorMovimientos.size() * eventsPerSensor);

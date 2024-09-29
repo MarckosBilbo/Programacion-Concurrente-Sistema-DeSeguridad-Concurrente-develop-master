@@ -25,9 +25,9 @@ public class AuthController {
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
             if (usuario.getRol() == Usuario.Rol.ADMIN) {
-                return ResponseEntity.ok("Admin");
+                return ResponseEntity.ok("redirect:/admin/dashboard");
             } else {
-                return ResponseEntity.ok("User");
+                return ResponseEntity.ok("redirect:/user/dashboard");
             }
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");

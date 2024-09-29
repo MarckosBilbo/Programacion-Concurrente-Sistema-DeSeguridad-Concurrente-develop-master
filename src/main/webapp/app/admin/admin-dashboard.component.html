@@ -1,0 +1,21 @@
+<div class="container">
+    <h2>Admin Dashboard</h2>
+    <div>
+        <h3>Register User</h3>
+        <form (ngSubmit)="createUser()">
+            <label for="newUserName">Nombre:</label>
+            <input type="text" id="newUserName" [(ngModel)]="newUserName" name="newUserName" required>
+            <input [(ngModel)]="newUserName" placeholder="Enter username" />
+            <button (click)="createUser()">Register User</button>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <div>
+        <h3>Event Terminal</h3>
+        <div class="terminal">
+            <!-- Display events here -->
+        </div>
+    </div>
+    <button class="return" (click)="goBack()">Return</button>
+</div>

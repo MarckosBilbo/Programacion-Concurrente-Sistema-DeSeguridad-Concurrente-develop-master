@@ -33,3 +33,9 @@ error:
       NotificacionNotificacionUnique: NOTIFICACION_NOTIFICACION_UNIQUE
 springdoc:
   pathsToMatch: /api/**
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /
+  resources:
+    static-locations: classpath:/static/

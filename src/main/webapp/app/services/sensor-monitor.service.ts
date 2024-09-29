@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class SensorMonitorService {
+  private apiUrl = '/api/sensors';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-    generateRandomEvents(): Observable<void> {
-        return this.http.get<void>('/api/sensorMonitor/generateRandomEvents');
-    }
+  generateRandomEvents(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/generateEvents`, {});
+  }
 }

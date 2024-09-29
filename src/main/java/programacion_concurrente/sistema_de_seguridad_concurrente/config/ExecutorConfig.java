@@ -10,6 +10,6 @@ public class ExecutorConfig {
 
     @Bean(name = "taskExecutor")
     public ExecutorService taskExecutor() {
-        return Executors.newFixedThreadPool(7); // Adjust as needed
+        return Executors.newFixedThreadPool(6); // Adjust as needed
     }
 }

@@ -1,4 +1,4 @@
-package programacion_concurrente.sistema_de_seguridad_concurrente;
+/*package programacion_concurrente.sistema_de_seguridad_concurrente;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +12,7 @@ public class SistemaDeSeguridadConcurrenteApplication {
     }
 
 }
-
+*/
 
 
 
@@ -56,14 +56,16 @@ public class SistemaDeSeguridadConcurrenteApplication implements CommandLineRunn
 
 
 
-
-/*package programacion_concurrente.sistema_de_seguridad_concurrente;
+package programacion_concurrente.sistema_de_seguridad_concurrente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import programacion_concurrente.sistema_de_seguridad_concurrente.service.SensorMonitorService;
+
+import java.awt.*;
+import java.net.URI;
 
 @SpringBootApplication
 public class SistemaDeSeguridadConcurrenteApplication implements CommandLineRunner {
@@ -81,17 +83,18 @@ public class SistemaDeSeguridadConcurrenteApplication implements CommandLineRunn
             .startSensorMonitoring();
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        // No need to initialize sensors here as it's done in SensorMonitorService
-    }
-
     public void startSensorMonitoring() {
         sensorMonitorService.generateRandomEvents();
         sensorMonitorService.shutdownExecutorService();
     }
+
+    @Override
+    public void run(String... args) throws Exception {
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().browse(new URI("http://localhost:8080"));
+        }
+    }
 }
-*/
 
 
 
