@@ -1,9 +1,9 @@
 ## Proyecto de Sistema de Seguridad Concurrente
 
-Repositorio final (DEFINITIVO)-->
-Repositorio preevio (para que veas los commits antiguos(NO TERMINADO))-->
+Repositorio final (DEFINITIVO)-->https://github.com/MarckosBilbo/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente-develop-master
+Repositorio preevio (para que veas los commits antiguos(NO TERMINADO))-->https://github.com/Programacion-Concurrente/Programacion-Concurrente-Sistema-DeSeguridad-Concurrente
 
-Este proyecto consiste en una aplicación de seguridad concurrente desarrollada con Spring Boot en el backend y Angular en el frontend. La aplicación permite la gestión de usuarios y la monitorización de eventos generados por sensores.
+##### -Este proyecto consiste en una aplicación de seguridad concurrente desarrollada con Spring Boot en el backend y Angular en el frontend. La aplicación permite la gestión de usuarios y la monitorización de eventos generados por sensores.
 
 ## Ejecución del Proyecto
 -Backend: Ejecutar la aplicación Spring Boot (Muestra los hilos por consola)
