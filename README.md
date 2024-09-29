@@ -82,6 +82,35 @@ Controlador REST que expone un endpoint para generar eventos aleatorios de senso
 - **Repositorio**:
   - `EventoRepository.java`: Interfaz que extiende `JpaRepository` para operaciones CRUD en la entidad `Evento`.
 
+
+##DOCKER.COMPOSE.YML:
+
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: Sistema-De-Seguridad-Concurrente
+    ports:
+      - "3307:3306"
+
+
 ### Configuración de Rutas en Angular
 
 ```typescript
@@ -102,5 +131,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
-
 
